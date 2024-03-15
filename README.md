@@ -50,3 +50,6 @@
 
 #### После постройки маршрутов
 ![](img/routes_example_2.png)
+
+## Использованная литература
+INTRACTABILITY OF THE DIAL-A-RIDE PROBLEM AND A MULTIOBJECTIVE SOLUTION USING SIMULATED ANNEALING, JOHN W. BAUGH JR. a , GOPALA KRISHNA REDDY KAKIVAYA a & JOHN R. STONE a Department of Civil Engineering , North Carolina State University , Raleigh, NC, 27695-7908, U.S.A. Published online: 27 Apr 2007.
