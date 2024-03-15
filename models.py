@@ -1,28 +1,38 @@
 import math
 
 
-class Location:
+class Vector2:
     def __init__(self, x: float = 0, y: float = 0):
         self.x = x
         self.y = y
+
+    def copy(self):
+        return Vector2(self.x, self.y)
 
     def __repr__(self):
         return f"({self.x}, {self.y})"
 
 
 class Order:
-    def __init__(self, start: Location, end: Location, price: float):
+    def __init__(self, start: Vector2, end: Vector2, cluster: int):
         self.start = start
         self.end = end
-        self.price = price
         self.length = math.dist([start.x, start.y], [end.x, end.y])
-        self.mid = Location((start.x + end.x) / 2, (start.y + end.y) / 2)
+        self.mid = Vector2((start.x + end.x) / 2, (start.y + end.y) / 2)
+        self.cluster = cluster
 
     def __repr__(self):
         return f"A = ({self.start}, B = {self.end})"
 
+    def __copy__(self):
+        return Order(
+            start=self.start,
+            end=self.end,
+            cluster=self.cluster
+        )
 
-def dist(A: Location, B: Location) -> float:
+
+def dist(A: Vector2, B: Vector2) -> float:
     return math.dist([A.x, A.y], [B.x, B.y])
 
 
@@ -38,10 +48,11 @@ def dist_between_orders(first: Order, second: Order):
 
 
 class Courier:
-    def __init__(self, pos: Location):
+    def __init__(self, pos: Vector2, cluster_id: int):
         self.pos = pos
         self.orders = []
         self.order_dist = 0
+        self.cluster_id = cluster_id
 
     def add_order(self, order: Order):
         self.orders.append(order)
@@ -57,7 +68,11 @@ class Courier:
         self.order_dist += min_dist
 
 
-class Cluster:
-    def __init__(self, courier: Courier):
-        self.courier = courier
-        self.orders = []
+class Destination:
+    type_start = "s"
+    type_end = "e"
+
+    def __init__(self, pos: Vector2, order_id: int, dest_type: str):
+        self.pos = pos
+        self.dest_type = dest_type
+        self.order_id = order_id
