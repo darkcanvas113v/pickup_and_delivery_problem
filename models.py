@@ -22,7 +22,7 @@ class Order:
         self.cluster = cluster
 
     def __repr__(self):
-        return f"A = ({self.start}, B = {self.end})"
+        return f"A = ({self.start}, B = {self.end}, cluster: {self.cluster})"
 
     def __copy__(self):
         return Order(
